@@ -5,8 +5,8 @@ This repository covers the Python implementation of a generative adversarial net
 Four different cases are available:
 
 *   Fluidic Pinball: direct-numerical simulation (DNS) data generated from *Deng et al. (2020)*.
-*   Turbulent Channel Flow: DNS data from a turbulent channel flow with friction Reynolds number $Re_{\tau}=1000$ available at [Johns Hopkins Turbulence Database](http://turbulence.pha.jhu.edu).
-*   Turbulent Boundary Layer Flow: experimental data of a turbulent boundary layer with friction Reynolds number $`Re_{\tau}\approx 900`$ acquired in the water-tunnel facility at Universidad Carlos III de Madrid.
+*   Turbulent Channel Flow: DNS data from a turbulent channel flow with friction Reynolds number <img src="https://render.githubusercontent.com/render/math?math=Re_{\tau}=1000"> available at [Johns Hopkins Turbulence Database](http://turbulence.pha.jhu.edu).
+*   Turbulent Boundary Layer Flow: experimental data of a turbulent boundary layer with friction Reynolds number <img src="https://render.githubusercontent.com/render/math?math=Re_{\tau}\approx 1000"> acquired in the water-tunnel facility at Universidad Carlos III de Madrid.
 *   Sea Surface Temperature: experimental data of the global sea surface temperature from January 2000 to December 2019, downloaded from [NOAA](http://www.esrl.noaa.gov/psd/).
 
 ## **Installation**
@@ -22,19 +22,19 @@ pip install -r requirements.txt
 To generate the tfrecord files, execute:
 
 ```console
-guest@vegeta:~$ python run_generate_tfrecords.py -c channel -u 4
+guest@vegeta:~$ python run_generate_tfrecords.py -c channel -u 4 -n 010
 ```
 
 To run the training procedure, execute:
 
 ```console
-guest@vegeta:~$ python run_training --case channel --upsampling 4 --model_name architecture01 --learning_rate 1e-4
+guest@vegeta:~$ python run_training --case channel --upsampling 4 --model_name architecture01-noise-010 --noise 10 --learning_rate 1e-4
 ```
 
 To compute the prediction of the testing dataset, execute:
 
 ```console
-guest@vegeta:~$ python run_predictions -c channel -u 4 -m architecture01 -l 1e-4
+guest@vegeta:~$ python run_predictions -c channel -u 4 -m architecture01-noise-010 -n 10 -l 1e-4
 ```
 
 ## **Publications**
