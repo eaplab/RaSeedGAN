@@ -22,19 +22,19 @@ pip install -r requirements.txt
 To generate the tfrecord files, execute:
 
 ```console
-guest@vegeta:~$ python run_generate_tfrecords.py -c channel -u 4 -n 010
+guest@vegeta:~$ python run_generate_tfrecords.py -c pinball -u 4 -n 010
 ```
 
 To run the training procedure, execute:
 
 ```console
-guest@vegeta:~$ python run_training --case channel --upsampling 4 --model_name architecture01-noise-010 --noise 10 --learning_rate 1e-4
+guest@vegeta:~$ python run_training --case pinball --upsampling 4 --model_name architecture01-noise-010 --noise 10 --learning_rate 1e-4
 ```
 
 To compute the prediction of the testing dataset, execute:
 
 ```console
-guest@vegeta:~$ python run_predictions -c channel -u 4 -m architecture01-noise-010 -n 10 -l 1e-4
+guest@vegeta:~$ python run_predictions -c pinball -u 4 -m architecture01-noise-010 -n 10 -l 1e-4
 ```
 
 ## **Publications**
