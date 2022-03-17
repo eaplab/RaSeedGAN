@@ -58,7 +58,7 @@ if __name__ == '__main__':
     """
 
     us = args.upsampling                                               # Subsampling case
-    root_folder = f'/STORAGE01/aguemes/gan-piv/{args.case}/'           # Folder containing the data for the selected case
+    root_folder = f'data/{args.case}/'           # Folder containing the data for the selected case
     noise = f"{args.noise:03d}"
 
     """
