@@ -90,7 +90,7 @@ if __name__ == '__main__':
     """
 
     us = args.upsampling                                               # Subsampling case
-    root_folder = f'/STORAGE01/aguemes/gan-piv/{args.case}/ss{us:02}/' # Folder containing the data for the selected case
+    root_folder = f'data/{args.case}/ss{us:02}/' # Folder containing the data for the selected case
     model_name = args.model_name                                       # String containing the nomel name
     noise = f"{args.noise:03d}"
     validation_split = args.validation_split
