@@ -22,26 +22,26 @@ pip install -r requirements.txt
 To generate the tfrecord files, execute:
 
 ```console
-guest@vegeta:~$ python run_generate_tfrecords.py -c pinball -u 4 -n 010
+python run_generate_tfrecords.py -c pinball -u 4 -n 010
 ```
 
 To run the training procedure, execute:
 
 ```console
-guest@vegeta:~$ python run_training --case pinball --upsampling 4 --model_name architecture01-noise-010 --noise 10 --learning_rate 1e-4
+python run_training --case pinball --upsampling 4 --model_name architecture01-noise-010 --noise 10 --learning_rate 1e-4
 ```
 
 To compute the prediction of the testing dataset, execute:
 
 ```console
-guest@vegeta:~$ python run_predictions -c pinball -u 4 -m architecture01-noise-010 -n 10 -l 1e-4
+python run_predictions -c pinball -u 4 -m architecture01-noise-010 -n 10 -l 1e-4
 ```
 
 ## **Publications**
 This repository has been used for the following scientific publications:
 
-- Güemes, A., Vila, C. S., & Discetti, S. (2022). Super-resolution GANs of randomly-seeded fields. *arXiv preprint arXiv:2202.11701*.
-- Güemes, A., Vila, C. S., & Discetti, S. (2021, August). GANs-based PIV resolution enhancement without the need of high-resolution input. In *14th International Symposium on Particle Image Velocimetry (Vol. 1, No. 1)*.
+- Güemes, A., Sanmiguel Vila, C., & Discetti, S. (2022). Super-resolution GANs of randomly-seeded fields. *arXiv preprint arXiv:2202.11701*.
+- Güemes, A., Sanmiguel Vila, C., & Discetti, S. (2021, August). GANs-based PIV resolution enhancement without the need of high-resolution input. In *14th International Symposium on Particle Image Velocimetry (Vol. 1, No. 1)*.
 
 ## **Authorship**
 This repository has been developed in the Experimental Aerodynamics and Propulsion group at Universidad Carloss III de Madrid. The following researchers are acknowledged for their contributions:
