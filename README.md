@@ -18,6 +18,8 @@ Use the package manager [pip3](https://pip.pypa.io/en/stable/) to install the re
 pip install -r requirements.txt
 ```
 
+Python 3.8.10 or higeher is required
+
 ## **Usage**
 
 To generate the tfrecord files, execute:
