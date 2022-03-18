@@ -1,4 +1,5 @@
 # **RAndomly-SEEDed super-resolution GAN (RaSeedGAN)**
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
 This repository covers the Python implementation of a generative adversarial network (GAN) for estimating high-resolution field quantities from random sparse sensors without needing any full-resolution field for training.
 
@@ -21,19 +22,19 @@ pip install -r requirements.txt
 
 To generate the tfrecord files, execute:
 
-```console
+```bash
 python run_generate_tfrecords.py -c pinball -u 4 -n 010
 ```
 
 To run the training procedure, execute:
 
-```console
+```bash
 python run_training --case pinball --upsampling 4 --model_name architecture01-noise-010 --noise 10 --learning_rate 1e-4
 ```
 
 To compute the prediction of the testing dataset, execute:
 
-```console
+```bash
 python run_predictions -c pinball -u 4 -m architecture01-noise-010 -n 10 -l 1e-4
 ```
 
@@ -55,3 +56,5 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## **License**
+See LICENSE.md for further details.
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
