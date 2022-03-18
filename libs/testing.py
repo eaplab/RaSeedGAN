@@ -7,14 +7,12 @@ Created on Sun Apr 11 17:04:07 2021
 
 import os
 import re
-import sys
-sys.path.insert(1, '/home/aguemes/tools/TheArtist')
 import matplotlib
 import numpy as np
 import scipy.io as sio
 import tensorflow as tf
 from tqdm import tqdm
-from artist import TheArtist
+from TheArtist import TheArtist
 import matplotlib.pyplot as plt
 
 
