@@ -29,7 +29,7 @@ python run_generate_tfrecords.py -c pinball -u 4 -n 010
 To run the training procedure, execute:
 
 ```bash
-python run_training --case pinball --upsampling 4 --model_name architecture01-noise-010 --noise 10 --learning_rate 1e-4
+python run_training.py --case pinball --upsampling 4 --model_name architecture01-noise-010 --noise 10 --learning_rate 1e-4
 ```
 
 To compute the prediction of the testing dataset, execute:
