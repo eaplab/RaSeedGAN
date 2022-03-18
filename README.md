@@ -35,7 +35,7 @@ python run_training.py --case pinball --upsampling 4 --model_name architecture01
 To compute the prediction of the testing dataset, execute:
 
 ```bash
-python run_predictions -c pinball -u 4 -m architecture01-noise-010 -n 10 -l 1e-4
+python run_predictions.py -c pinball -u 4 -m architecture01-noise-010 -n 10 -l 1e-4
 ```
 
 ## **Publications**
