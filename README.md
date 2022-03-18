@@ -48,7 +48,7 @@ This repository has been used for the following scientific publications:
 This repository has been developed in the Experimental Aerodynamics and Propulsion group at Universidad Carloss III de Madrid. The following researchers are acknowledged for their contributions:
 - Alejandro Güemes
 - Stefano Discetti
-- Carlos Sanmiguel
+- Carlos Sanmiguel Vila
 
 ## **Contributing**
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
