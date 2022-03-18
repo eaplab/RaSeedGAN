@@ -12,7 +12,7 @@ Four different cases are available:
 
 ## **Installation**
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the required dependencies.
+Use the package manager [pip3](https://pip.pypa.io/en/stable/) to install the required dependencies.
 
 ```bash
 pip install -r requirements.txt
@@ -56,5 +56,6 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## **License**
-See LICENSE.md for further details.
+Creative Commons Attribution 4.0 International. See LICENSE.md for further details.
+
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
