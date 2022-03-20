@@ -1,6 +1,9 @@
 # **RAndomly-SEEDed super-resolution GAN (RaSeedGAN)**
 [![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+<a href="https://github.com/Andy53/ERC.Xdbg/commits/master">
+    <img src="https://img.shields.io/github/last-commit/eaplab/RaSeedGAN?style=flat-square&logo=github&logoColor=white">
+</a>
 
 This repository covers the Python implementation of a generative adversarial network (GAN) for estimating high-resolution field quantities from random sparse sensors without needing any full-resolution field for training.
 
@@ -58,6 +61,9 @@ This repository has been developed in the Experimental Aerodynamics and Propulsi
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
+## **Funding**
+This project has received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement No 949085).
 
 ## **License**
 Creative Commons Attribution 4.0 International. See LICENSE.md for further details.
