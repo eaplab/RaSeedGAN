@@ -1,24 +1,24 @@
 # **RAndomly-SEEDed super-resolution GAN (RaSeedGAN)**
+[![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
 This repository covers the Python implementation of a generative adversarial network (GAN) for estimating high-resolution field quantities from random sparse sensors without needing any full-resolution field for training.
 
-Four different cases are available:
+The proposed network has been testes with four different cases. The associated raw data will be completed in the coming weeks. The datasets are:
 
-*   Fluidic Pinball: direct-numerical simulation (DNS) data generated from *Deng et al. (2020)*.
-*   Turbulent Channel Flow: DNS data from a turbulent channel flow with friction Reynolds number <img src="https://render.githubusercontent.com/render/math?math=Re_{\tau}=1000"> available at [Johns Hopkins Turbulence Database](http://turbulence.pha.jhu.edu).
-*   Turbulent Boundary Layer Flow: experimental data of a turbulent boundary layer with friction Reynolds number <img src="https://render.githubusercontent.com/render/math?math=Re_{\tau}\approx 1000"> acquired in the water-tunnel facility at Universidad Carlos III de Madrid.
-*   Sea Surface Temperature: experimental data of the global sea surface temperature from January 2000 to December 2019, downloaded from [NOAA](http://www.esrl.noaa.gov/psd/).
+*   Fluidic Pinball: direct-numerical simulation (DNS) data generated from *Deng et al. (2020)*. **(Available)**
+*   Turbulent Channel Flow: DNS data from a turbulent channel flow with friction Reynolds number <img src="https://render.githubusercontent.com/render/math?math=Re_{\tau}=1000"> available at [Johns Hopkins Turbulence Database](http://turbulence.pha.jhu.edu). **(To appear soon)**
+*   Turbulent Boundary Layer Flow: experimental data of a turbulent boundary layer with friction Reynolds number <img src="https://render.githubusercontent.com/render/math?math=Re_{\tau}\approx 1000"> acquired in the water-tunnel facility at Universidad Carlos III de Madrid. **(To appear soon)**
+*   Sea Surface Temperature: experimental data of the global sea surface temperature from January 2000 to December 2019, downloaded from [NOAA](http://www.esrl.noaa.gov/psd/). **(To appear soon)**
 
 ## **Installation**
 
-Use the package manager [pip3](https://pip.pypa.io/en/stable/) to install the required dependencies.
+Use the package manager [pip3](https://pip.pypa.io/en/stable/) to install the required dependencies. Python 3.8 is required.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Python 3.8.10 or higeher is required
 
 ## **Usage**
 
@@ -37,8 +37,10 @@ python run_training.py --case pinball --upsampling 4 --model_name architecture01
 To compute the prediction of the testing dataset, execute:
 
 ```bash
-python run_predictions.py -c pinball -u 4 -m architecture01-noise-010 -n 10 -l 1e-4
+python run_compute_predictions.py -c pinball -u 4 -m architecture01-noise-010 -n 10 -l 1e-4
 ```
+
+On a system with one GPU available, fluidic pinball case with upsampling factor <img src="https://render.githubusercontent.com/render/math?math=f_u=4"> takes approximately 100 seconds to run a sinfle epoch. 
 
 ## **Publications**
 This repository has been used for the following scientific publications:
