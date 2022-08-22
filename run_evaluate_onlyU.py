@@ -65,10 +65,18 @@ def main():
 
                 # Define path to file containing scaling value
 
+                filename = f"{root_folder}tfrecords/scaling_us{us}_noise_{noise}.npz"
+
                 if channels == 2:
 
-                    filename = f"{root_folder}results/predictions_{model_name}{subversion}.npz"
+                    Upiv_mean = (np.expand_dims(np.load(filename)['Upiv_mean'], axis=0)) *res#/ 512 / 0.013
+                    Uptv_mean = (np.expand_dims(np.load(filename)['Uptv_mean'], axis=0)) *res#/ 512 / 0.013
                     
+                    Upiv_std = (np.expand_dims(np.load(filename)['Upiv_std'], axis=0)) *res#/ 512 / 0.013
+                    Uptv_std = (np.expand_dims(np.load(filename)['Uptv_std'], axis=0)) *res#/ 512 / 0.013
+                    
+                    filename = f"{root_folder}results/predictions_{model_name}{subversion}.npz"
+
                     data = np.load(filename)
 
                     dns_target = data['dns_target'] * res
@@ -79,13 +87,12 @@ def main():
                     lr_target  = data['lr_target'] 
                     fl_target  = data['fl_target']
 
-                    # dns_target = np.where(np.sum(fl_target[:,:,:,[0]], axis=0) == 0, np.nan, dns_target)
-                    # cbc_predic = np.where(np.sum(fl_target[:,:,:,[0]], axis=0) == 0, np.nan, cbc_predic)
-                    # gap_predic = np.where(np.sum(fl_target[:,:,:,[0]], axis=0) == 0, np.nan, gap_predic)
-                    # hr_predic = np.where(np.sum(fl_target[:,:,:,[0]], axis=0) == 0, np.nan, hr_predic)
+                    # dns_target = np.where(np.sum(fl_target, axis=0) == 0, np.nan, dns_target)
+                    # cbc_predic = np.where(np.sum(fl_target, axis=0) == 0, np.nan, cbc_predic)
+                    # gap_predic = np.where(np.sum(fl_target, axis=0) == 0, np.nan, gap_predic)
+                    # hr_predic = np.where(np.sum(fl_target, axis=0) == 0, np.nan, hr_predic)
 
                     scaU = np.nanvar(dns_target[:,:,:,0])
-                    scaV = np.nanvar(dns_target[:,:,:,1])
                     
                     """
                         Error metrics
@@ -96,22 +103,19 @@ def main():
                     print('GAN')
                     # print(np.sqrt(np.nanmean((dns_target[:, :, :, 0] -  hr_predic[:, :, :, 0])**2/ scaU)))
                     # print(np.sqrt(np.nanmean((dns_target[:, :, :, 1] -  hr_predic[:, :, :, 1])**2/ scaU)))
-                    print(np.round(np.sqrt(np.nanmean((dns_target[:, us:-us, us:-us, 0] -  hr_predic[:, us:-us, us:-us, 0])**2/ scaU)), 3))
-                    print(np.round(np.sqrt(np.nanmean((dns_target[:, us:-us, us:-us, 1] -  hr_predic[:, us:-us, us:-us, 1])**2/ scaV)), 3))
+                    print(np.sqrt(np.nanmean((dns_target[:, us:-us, us:-us, 0] -  hr_predic[:, us:-us, us:-us, 0])**2/ scaU)))
                     # print(np.sqrt(np.nanmean((dns_target[:, 20:76, 75:113, 0] -  hr_predic[:, 20:76, 75:113, 0])**2/ scaU)))
                     # print(np.sqrt(np.nanmean((dns_target[:, 20:76, 75:113, 1] -  hr_predic[:, 20:76, 75:113, 1])**2/ scaU)))
                     print('Cubic')
                     # print(np.sqrt(np.nanmean((dns_target[:, :, :, 0] -  cbc_predic[:, :, :, 0])**2/ scaU)))
                     # print(np.sqrt(np.nanmean((dns_target[:, :, :, 1] -  cbc_predic[:, :, :, 1])**2/ scaU)))
-                    print(np.round(np.sqrt(np.nanmean((dns_target[:, us:-us, us:-us, 0] -  cbc_predic[:, us:-us, us:-us, 0])**2/ scaU)), 3))
-                    print(np.round(np.sqrt(np.nanmean((dns_target[:, us:-us, us:-us, 1] -  cbc_predic[:, us:-us, us:-us, 1])**2/ scaV)), 3))
+                    print(np.sqrt(np.nanmean((dns_target[:, us:-us, us:-us, 0] -  cbc_predic[:, us:-us, us:-us, 0])**2/ scaU)))
                     # print(np.sqrt(np.nanmean((dns_target[:, 20:76, 75:113, 0] -  cbc_predic[:, 20:76, 75:113, 0])**2/ scaU)))
                     # print(np.sqrt(np.nanmean((dns_target[:, 20:76, 75:113, 1] -  cbc_predic[:, 20:76, 75:113, 1])**2/ scaU)))
                     print('Gappy')
                     # print(np.sqrt(np.nanmean((dns_target[:, :, :, 0] -  gap_predic[:, :, :, 0])**2/ scaU)))
                     # print(np.sqrt(np.nanmean((dns_target[:, :, :, 1] -  gap_predic[:, :, :, 1])**2/ scaU)))
-                    print(np.round(np.sqrt(np.nanmean((dns_target[:, us:-us, us:-us, 0] -  gap_predic[:, us:-us, us:-us, 0])**2/ scaU)), 3))
-                    print(np.round(np.sqrt(np.nanmean((dns_target[:, us:-us, us:-us, 1] -  gap_predic[:, us:-us, us:-us, 1])**2/ scaV)), 3))
+                    print(np.sqrt(np.nanmean((dns_target[:, us:-us, us:-us, 0] -  gap_predic[:, us:-us, us:-us, 0])**2/ scaU)))
                     # print(np.sqrt(np.nanmean((dns_target[:, 20:76, 75:113, 0] -  gap_predic[:, 20:76, 75:113, 0])**2/ scaU)))
                     # print(np.sqrt(np.nanmean((dns_target[:, 20:76, 75:113, 1] -  gap_predic[:, 20:76, 75:113, 1])**2/ scaU)))
 
@@ -123,43 +127,7 @@ def main():
                     # plt.imshow(cbc_predic[90, :, :, 0], vmin=-2,vmax=2, cmap='RdBu_r', extent=[0,6,-1,1])
                     # plt.subplot(144)
                     # plt.imshow(gap_predic[90, :, :, 0], vmin=-2,vmax=2, cmap='RdBu_r', extent=[0,6,-1,1])
-                    # plt.savefig('test.png')
-
-
-                elif channels == 1:
-
-                    filename = f"{root_folder}results/predictions_{model_name}.npz"
-
-                    data = np.load(filename)
-
-                    dns_target = data['dns_target'] * res
-                    cbc_predic = data['cbc_predic'] * res
-                    gap_predic = data['gap_predic'] * res
-                    hr_predic  = data['hr_predic'] 
-                    hr_target  = data['hr_target'] 
-                    lr_target  = data['lr_target'] 
-                    fl_target  = data['fl_target']
-
-                    dns_target = np.where(np.sum(fl_target, axis=0) == 0, np.nan, dns_target)
-                    cbc_predic = np.where(np.sum(fl_target, axis=0) == 0, np.nan, cbc_predic)
-                    gap_predic = np.where(np.sum(fl_target, axis=0) == 0, np.nan, gap_predic)
-                    hr_predic = np.where(np.sum(fl_target, axis=0) == 0, np.nan, hr_predic)
-
-                    """
-                        Error metrics
-                    """
-
-                    # Mean-squared error
-
-                    scaT = np.nanvar(dns_target[:,:,:,0])
-                    print(scaT)
-                    print('GAN')
-                    print(np.round(np.sqrt(np.nanmean((dns_target[:, :, 1:, 0] -   hr_predic[:, :, 1:, 0])**2/ scaT)),3))
-                    print('Cubic')
-                    print(np.round(np.sqrt(np.nanmean((dns_target[:, :, 1:, 0] -  cbc_predic[:, :, 1:, 0])**2/ scaT)),3))
-                    print('Gappy')
-                    print(np.round(np.sqrt(np.nanmean((dns_target[:, :, 1:, 0] -  gap_predic[:, :, 1:, 0])**2/ scaT)),3))
-
+                    # plt.savefig('testOnlyU.png')
     return
 
 

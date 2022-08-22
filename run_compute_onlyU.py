@@ -6,7 +6,7 @@ Created on Sun Apr 11 17:02:25 2021
 
 
 import os
-os.environ["CUDA_VISIBLE_DEVICES"]='0'
+os.environ["CUDA_VISIBLE_DEVICES"]='1'
 os.environ["TF_CPP_MIN_LOG_LEVEL"]='2'
 import tensorflow as tf
 physical_devices = tf.config.list_physical_devices('GPU')
@@ -41,7 +41,7 @@ def main():
 
     # Call testing pipeline generator
 
-    dataset_test, n_samp = generate_pipeline_testing(root_folder, us, channels, noise, subversion)
+    dataset_test, n_samp = generate_pipeline_testing_onlyU(root_folder, us, channels, noise, subversion)
 
     """
         Generate training models
@@ -49,7 +49,7 @@ def main():
 
     # Define model class for channel architectures
 
-    channel = GANPIV(model_name, us, nx, ny, channels=channels)
+    channel = GANPIV(model_name, us, nx, ny, channels=1)
     
     # Generate model and loss objects for desired arquitecture
 
@@ -63,7 +63,7 @@ def main():
         Compute predictions
     """
 
-    compute_predictions(root_folder, model_name, dataset_test, n_samp, nx, ny, res, us, channels, noise, generator, discriminator, generator_optimizer, discriminator_optimizer, subversion)
+    compute_predictions_onlyU(root_folder, model_name, dataset_test, n_samp, nx, ny, res, us, 1, noise, generator, discriminator, generator_optimizer, discriminator_optimizer, subversion)
 
 
     return

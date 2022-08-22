@@ -42,22 +42,14 @@ def main():
     # Call pipeline generator
 
     dataset_train, dataset_valid = generate_pipeline_training(root_folder, us, channels, noise, validation_split, shuffle_buffer, batch_size, n_prefetch)
-
-    # itr = iter(dataset_train)
-
-    # for _ in range(1):
-
-    #     piv, ptv,flag = next(itr)
-
-    # print(piv.numpy()[0,:,10,0])
-    # jjj
+    
     """
         Generate training models
     """
 
     # Define model class for Tensorflow architectures
 
-    ganpiv = GANPIV('test', us, nx, ny, channels=channels)
+    ganpiv = GANPIVpowerful('test', us, nx, ny, channels=channels)
 
     # Generate model and loss objects for desired arquitecture
 
@@ -66,9 +58,7 @@ def main():
     # Generate optimizers
 
     generator_optimizer, discriminator_optimizer = ganpiv.optimizer(learning_rate)
-    print(generator.summary())
-    print(discriminator.summary())
-    kkk
+
     """
         Run training loop
     """

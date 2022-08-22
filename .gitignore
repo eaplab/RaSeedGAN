@@ -1,9 +1,11 @@
 .env/
+.envN/
 __pycache__/
 old/
 notebooks/
 cylinder/
 channel/
+figs/
 .DS_Store
 *.pdf
 *.png

@@ -23,7 +23,7 @@ def get_conf(case):
         ny = 32                 # Grid points in the wall-normal direction for the low resolution data
         res = 1/512/0.013       # Resolution
         channels = 2            # Number of output channels
-        n_samples_test = 1856   # Number of testing samples
+        n_samples_test = 1753 #1856   # Number of testing samples
         n_samples_train = 10000 # Number of training samples
         max_samples_per_tf = 50 # Maximum number of samples per tfrecord file
 

@@ -6,7 +6,7 @@ Created on Sun Apr 11 17:02:25 2021
 
 
 import os
-os.environ["CUDA_VISIBLE_DEVICES"]='0'
+os.environ["CUDA_VISIBLE_DEVICES"]='2'
 os.environ["TF_CPP_MIN_LOG_LEVEL"]='2'
 import tensorflow as tf
 physical_devices = tf.config.list_physical_devices('GPU')
@@ -49,7 +49,7 @@ def main():
 
     # Define model class for channel architectures
 
-    channel = GANPIV(model_name, us, nx, ny, channels=channels)
+    channel = GANPIVpowerful(model_name, us, nx, ny, channels=channels)
     
     # Generate model and loss objects for desired arquitecture
 

@@ -6,7 +6,7 @@ Created on Sat Apr 10 11:38:43 2021
 
 
 import os
-os.environ["CUDA_VISIBLE_DEVICES"]='3'
+os.environ["CUDA_VISIBLE_DEVICES"]='0'
 os.environ["TF_CPP_MIN_LOG_LEVEL"]='2'
 import tensorflow as tf
 physical_devices = tf.config.list_physical_devices('GPU')
@@ -41,7 +41,7 @@ def main():
 
     # Call pipeline generator
 
-    dataset_train, dataset_valid = generate_pipeline_training(root_folder, us, channels, noise, validation_split, shuffle_buffer, batch_size, n_prefetch)
+    dataset_train, dataset_valid = generate_pipeline_training_onlyU(root_folder, us, channels, noise, validation_split, shuffle_buffer, batch_size, n_prefetch)
 
     # itr = iter(dataset_train)
 
@@ -49,7 +49,7 @@ def main():
 
     #     piv, ptv,flag = next(itr)
 
-    # print(piv.numpy()[0,:,10,0])
+    # print(piv.numpy().shape)
     # jjj
     """
         Generate training models
@@ -57,7 +57,7 @@ def main():
 
     # Define model class for Tensorflow architectures
 
-    ganpiv = GANPIV('test', us, nx, ny, channels=channels)
+    ganpiv = GANPIV('test', us, nx, ny, channels=1)
 
     # Generate model and loss objects for desired arquitecture
 

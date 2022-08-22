@@ -24,19 +24,19 @@ def main():
         Generate training tfrecords
     """
 
-    # generate_tfrecords_training(root_folder, us, n_samples_train, max_samples_per_tf, channels, noise)
+    generate_tfrecords_training_lowV(root_folder, us, n_samples_train, max_samples_per_tf, channels, noise)
 
     """
         Generate testing tfrecords
     """
 
-    generate_tfrecords_testing(root_folder, us, n_samples_train, n_samples_test, max_samples_per_tf, channels, noise, subversion)
+    generate_tfrecords_testing_lowV(root_folder, us, n_samples_train, n_samples_test, max_samples_per_tf, channels, noise, subversion)
 
     """
         Generate scaling data
     """
 
-    # generate_scaling_data(root_folder, nx, ny, us, n_samples_train, channels, noise)
+    generate_scaling_data_lowV(root_folder, nx, ny, us, n_samples_train, channels, noise)
 
     return
 
