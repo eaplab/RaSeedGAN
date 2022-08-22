@@ -1,6 +1,9 @@
 .env/
+.envN/
 __pycache__/
 old/
+figs/
 .DS_Store
 *.pdf
 *.out
+*.png
