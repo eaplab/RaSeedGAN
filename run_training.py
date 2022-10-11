@@ -6,7 +6,7 @@ Created on Sat Apr 10 11:38:43 2021
 
 
 import os
-os.environ["CUDA_VISIBLE_DEVICES"]='1'
+os.environ["CUDA_VISIBLE_DEVICES"]='3'
 os.environ["TF_CPP_MIN_LOG_LEVEL"]='2'
 import tensorflow as tf
 physical_devices = tf.config.list_physical_devices('GPU')
@@ -42,7 +42,15 @@ def main():
     # Call pipeline generator
 
     dataset_train, dataset_valid = generate_pipeline_training(root_folder, us, channels, noise, validation_split, shuffle_buffer, batch_size, n_prefetch)
-    
+
+    # itr = iter(dataset_train)
+
+    # for _ in range(1):
+
+    #     piv, ptv,flag = next(itr)
+
+    # print(piv.numpy()[0,:,10,0])
+    # jjj
     """
         Generate training models
     """
@@ -58,7 +66,9 @@ def main():
     # Generate optimizers
 
     generator_optimizer, discriminator_optimizer = ganpiv.optimizer(learning_rate)
-
+    print(generator.summary())
+    print(discriminator.summary())
+    kkk
     """
         Run training loop
     """

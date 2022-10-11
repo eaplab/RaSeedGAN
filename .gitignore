@@ -2,6 +2,12 @@
 .envN/
 __pycache__/
 old/
+<<<<<<< HEAD
+=======
+notebooks/
+cylinder/
+channel/
+>>>>>>> d697111dba0b1b8df36000c0c120a92bf7e61e0e
 figs/
 .DS_Store
 *.pdf
