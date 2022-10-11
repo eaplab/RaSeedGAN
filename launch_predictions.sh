@@ -1,3 +1,18 @@
-# python run_compute_predictions.py -c channel -u 2 -m architecture-01-noise-010 -n 10
-# python run_compute_predictions.py -c channel -u 4 -m architecture-01-noise-010 -n 10
-python run_compute_predictions.py -c channel -u 8 -m architecture-01-noise-010 -n 10
+python -u run_compute_prediction.py -c pinball -u 2 -m architecture-01-noise-010 -n 10
+python -u run_compute_prediction.py -c pinball -u 4 -m architecture-01-noise-010 -n 10
+python -u run_compute_prediction.py -c pinball -u 8 -m architecture-01-noise-010 -n 10
+
+python -u run_compute_prediction.py -c pinball -u 2 -m architecture-01-noise-050 -n 50
+python -u run_compute_prediction.py -c pinball -u 4 -m architecture-01-noise-050 -n 50
+python -u run_compute_prediction.py -c pinball -u 8 -m architecture-01-noise-050 -n 50
+
+python -u run_compute_prediction.py -c channel -u 2 -m architecture-01-noise-010 -n 10
+python -u run_compute_prediction.py -c channel -u 4 -m architecture-01-noise-010 -n 10
+python -u run_compute_prediction.py -c channel -u 8 -m architecture-01-noise-010 -n 10
+
+python -u run_compute_prediction.py -c sst -u 2 -m architecture-02-noise-000 -n 0
+python -u run_compute_prediction.py -c sst -u 4 -m architecture-02-noise-000 -n 0
+python -u run_compute_prediction.py -c sst -u 8 -m architecture-02-noise-000 -n 0
+
+python -u run_compute_prediction.py -c exptbl -u 2 -m architecture-01-noise-000 -n 0
+python -u run_compute_prediction.py -c exptbl -u 4 -m architecture-01-noise-000 -n 0
