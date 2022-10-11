@@ -41,30 +41,20 @@ def get_conf(case):
 
         nx = 31                 # Grid points in the streamwise direction for the low resolution data
         ny = 32                 # Grid points in the wall-normal direction for the low resolution data
-        res = 1                # Resolution
-        channels = 2
+        res = 1                 # Resolution
+        channels = 2            # Number of output channels
         n_samples_test = 2000   # Number of testing samples
         n_samples_train = 30000 # Number of training samples
-        max_samples_per_tf = 1000 # Maximum number of samples per tfrecord file
+        max_samples_per_tf = 9000 # Maximum number of samples per tfrecord file
 
     if case == 'sst':
 
         nx = 90                 # Grid points in the streamwise direction for the low resolution data
         ny = 45                 # Grid points in the wall-normal direction for the low resolution data
-        res = 1                # Resolution
-        channels = 1            # Number of output channels
-        n_samples_test = 1305   # Number of testing samples
-        n_samples_train = 6000 # Number of training samples
-        max_samples_per_tf = 50 # Maximum number of samples per tfrecord file
-
-    if case == 'buoyancy':
-
-        nx = 64                 # Grid points in the streamwise direction for the low resolution data
-        ny = 64                 # Grid points in the wall-normal direction for the low resolution data
         res = 1                 # Resolution
         channels = 1            # Number of output channels
-        n_samples_test = 3000   # Number of testing samples
-        n_samples_train = 12000 # Number of training samples
+        n_samples_test = 1305   # Number of testing samples
+        n_samples_train = 6000  # Number of training samples
         max_samples_per_tf = 50 # Maximum number of samples per tfrecord file
 
     return nx, ny, res, channels, n_samples_test, n_samples_train, max_samples_per_tf

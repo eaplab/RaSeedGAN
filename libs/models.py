@@ -392,6 +392,3 @@ class GANPIV(object):
         discriminator_optimizer = tf.keras.optimizers.Adam(learning_rate)
 
         return generator_optimizer, discriminator_optimizer
-
-
-

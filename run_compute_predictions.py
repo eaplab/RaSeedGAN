@@ -41,7 +41,7 @@ def main():
 
     # Call testing pipeline generator
 
-    dataset_test, n_samp = generate_pipeline_testing(root_folder, us, channels, noise)
+    dataset_test, n_samp = generate_pipeline_testing(root_folder, us, channels, noise, subversion)
 
     """
         Generate training models
@@ -63,7 +63,7 @@ def main():
         Compute predictions
     """
 
-    compute_predictions(root_folder, model_name, dataset_test, n_samp, nx, ny, res, us, channels, noise, generator, discriminator, generator_optimizer, discriminator_optimizer)
+    compute_predictions(root_folder, model_name, dataset_test, n_samp, nx, ny, res, us, channels, noise, generator, discriminator, generator_optimizer, discriminator_optimizer, subversion)
 
 
     return
@@ -80,6 +80,7 @@ if __name__ == '__main__':
     parser.add_argument("-m", "--model_name", type=str, required=True)
     parser.add_argument("-n", "--noise", type=int, required=True)
     parser.add_argument("-l", "--learning_rate", type=float, default=1e-4)
+    parser.add_argument("-s", "--subversion", type=str, default="")
     args = parser.parse_args()
 
     """
@@ -90,7 +91,8 @@ if __name__ == '__main__':
     root_folder = f'data/{args.case}/ss{us:02}/' # Folder containing the data for the selected case
     model_name = args.model_name                                       # String containing the nomel name
     noise = f"{args.noise:03d}"
-    learning_rate = args.learning_rate                                 # Learning rate for the SGD algorithm
+    learning_rate = args.learning_rate  
+    subversion = args.subversion                                 # Learning rate for the SGD algorithm
 
     """
         Run execution logic

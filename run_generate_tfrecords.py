@@ -24,19 +24,19 @@ def main():
         Generate training tfrecords
     """
 
-    generate_tfrecords_training(root_folder, us, n_samples_train, max_samples_per_tf, channels, noise)
+    # generate_tfrecords_training(root_folder, us, n_samples_train, max_samples_per_tf, channels, noise)
 
     """
         Generate testing tfrecords
     """
 
-    generate_tfrecords_testing(root_folder, us, n_samples_train, n_samples_test, max_samples_per_tf, channels, noise)
+    generate_tfrecords_testing(root_folder, us, n_samples_train, n_samples_test, max_samples_per_tf, channels, noise, subversion)
 
     """
         Generate scaling data
     """
 
-    generate_scaling_data(root_folder, nx, ny, us, n_samples_train, channels, noise)
+    # generate_scaling_data(root_folder, nx, ny, us, n_samples_train, channels, noise)
 
     return
 
@@ -51,6 +51,7 @@ if __name__ == '__main__':
     parser.add_argument("-c", "--case", type=str, required=True)
     parser.add_argument("-u", "--upsampling", type=int, required=True)
     parser.add_argument("-n", "--noise", type=int, required=True)
+    parser.add_argument("-s", "--subversion", type=str, default="")
     args = parser.parse_args()
 
     """
@@ -60,6 +61,7 @@ if __name__ == '__main__':
     us = args.upsampling                                               # Subsampling case
     root_folder = f'data/{args.case}/'           # Folder containing the data for the selected case
     noise = f"{args.noise:03d}"
+    subversion = args.subversion
 
     """
         Run execution logic

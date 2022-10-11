@@ -25,6 +25,7 @@ import numpy as np
 import tensorflow as tf
 from libs import *
 import scipy.io as sio
+import matplotlib.pyplot as plt
 
 
 def main():
@@ -54,7 +55,7 @@ def main():
                     Define case options
                 """
 
-                root_folder = f'/STORAGE01/aguemes/gan-piv/{case}/ss{us:02}/' # Folder containing the data for the selected case
+                root_folder = f'data/{case}/ss{us:02}/' # Folder containing the data for the selected case
 
                 """
                     Scale data
@@ -64,98 +65,72 @@ def main():
 
                 # Define path to file containing scaling value
 
-                filename = f"{root_folder}tfrecords/scaling_us{us}_noise_{noise}.npz"
-
                 if channels == 2:
 
-                    Upiv_mean = (np.expand_dims(np.load(filename)['Upiv_mean'], axis=0)) *res#/ 512 / 0.013
-                    Vpiv_mean = (np.expand_dims(np.load(filename)['Vpiv_mean'], axis=0)) *res#/ 512 / 0.013
-                    Uptv_mean = (np.expand_dims(np.load(filename)['Uptv_mean'], axis=0)) *res#/ 512 / 0.013
-                    Vptv_mean = (np.expand_dims(np.load(filename)['Vptv_mean'], axis=0)) *res#/ 512 / 0.013
-
-                    Upiv_std = (np.expand_dims(np.load(filename)['Upiv_std'], axis=0)) *res#/ 512 / 0.013
-                    Vpiv_std = (np.expand_dims(np.load(filename)['Vpiv_std'], axis=0)) *res#/ 512 / 0.013
-                    Uptv_std = (np.expand_dims(np.load(filename)['Uptv_std'], axis=0)) *res#/ 512 / 0.013
-                    Vptv_std = (np.expand_dims(np.load(filename)['Vptv_std'], axis=0)) *res#/ 512 / 0.013
-                
-                    filename = f"{root_folder}results/predictions_{model_name}.npz"
-
+                    filename = f"{root_folder}results/predictions_{model_name}{subversion}.npz"
+                    
                     data = np.load(filename)
 
                     dns_target = data['dns_target'] * res
                     cbc_predic = data['cbc_predic'] * res
+                    gap_predic = data['gap_predic'] * res
                     hr_predic  = data['hr_predic'] 
                     hr_target  = data['hr_target'] 
                     lr_target  = data['lr_target'] 
                     fl_target  = data['fl_target']
 
+                    scaU = np.nanvar(dns_target[:,:,:,0])
+                    scaV = np.nanvar(dns_target[:,:,:,1])
+                    
                     """
                         Error metrics
                     """
 
                     # Mean-squared error
-                    print(np.sqrt(np.nanmean(np.divide((dns_target[:, :, 1:, 0] -  hr_predic[:, :, 1:, 0])**2, Uptv_std[:, :,1:] * Uptv_std[:, :,1:], out=np.zeros_like(dns_target[:, :, 1:, 0]), where=Uptv_std[:, :,1:]!=0))))
-                    print(np.sqrt(np.nanmean(np.divide((dns_target[:, :, :, 0] -  hr_predic[:, :, :, 0])**2, Uptv_std * Uptv_std, out=np.zeros_like(dns_target[:, :, :, 0]), where=Uptv_std!=0))))
-                    print(np.sqrt(np.nanmean(np.divide((dns_target[:, :, :, 1] -  hr_predic[:, :, :, 1])**2, Vptv_std * Vptv_std, out=np.zeros_like(dns_target[:, :, :, 0]), where=Vptv_std!=0))))
-                    print(np.sqrt(np.nanmean(np.divide((dns_target[:, :, :, 0] - cbc_predic[:, :, :, 0])**2, Uptv_std * Uptv_std, out=np.zeros_like(dns_target[:, :, :, 0]), where=Uptv_std!=0))))
-                    print(np.sqrt(np.nanmean(np.divide((dns_target[:, :, :, 1] - cbc_predic[:, :, :, 1])**2, Vptv_std * Vptv_std, out=np.zeros_like(dns_target[:, :, :, 0]), where=Vptv_std!=0))))
-
-
-                    import matplotlib.pyplot as plt
-
-                    plt.subplot(411)
-                    plt.imshow( lr_target[90, :, :, 0]-Upiv_mean[0,:,:], vmin=-0.3,vmax=0.3, cmap='RdBu_r', extent=[0,2,0,1])
-                    plt.subplot(412)
-                    plt.imshow(dns_target[90, :, :, 0]-Uptv_mean[0,:,:], vmin=-0.3,vmax=0.3, cmap='RdBu_r', extent=[0,2,0,1])
-                    plt.subplot(413)
-                    plt.imshow(cbc_predic[90, :, :, 0]-Uptv_mean[0,:,:], vmin=-0.3,vmax=0.3, cmap='RdBu_r', extent=[0,2,0,1])
-                    plt.subplot(414)
-                    plt.imshow( hr_predic[90, :, :, 0]-Uptv_mean[0,:,:], vmin=-0.3,vmax=0.3, cmap='RdBu_r', extent=[0,2,0,1])
-
-                    plt.savefig('test.png')
-
+                    
+                    print('GAN')
+                    print(np.round(np.sqrt(np.nanmean((dns_target[:, us:-us, us:-us, 0] -  hr_predic[:, us:-us, us:-us, 0])**2/ scaU)), 3))
+                    print(np.round(np.sqrt(np.nanmean((dns_target[:, us:-us, us:-us, 1] -  hr_predic[:, us:-us, us:-us, 1])**2/ scaV)), 3))
+                    print('Cubic')
+                    print(np.round(np.sqrt(np.nanmean((dns_target[:, us:-us, us:-us, 0] -  cbc_predic[:, us:-us, us:-us, 0])**2/ scaU)), 3))
+                    print(np.round(np.sqrt(np.nanmean((dns_target[:, us:-us, us:-us, 1] -  cbc_predic[:, us:-us, us:-us, 1])**2/ scaV)), 3))
+                    print('Gappy')
+                    print(np.round(np.sqrt(np.nanmean((dns_target[:, us:-us, us:-us, 0] -  gap_predic[:, us:-us, us:-us, 0])**2/ scaU)), 3))
+                    print(np.round(np.sqrt(np.nanmean((dns_target[:, us:-us, us:-us, 1] -  gap_predic[:, us:-us, us:-us, 1])**2/ scaV)), 3))
 
                 elif channels == 1:
 
-                    Tpiv_mean = (np.expand_dims(np.load(filename)['Tpiv_mean'], axis=0)) *res#/ 512 / 0.013
-                    Tptv_mean = (np.expand_dims(np.load(filename)['Tptv_mean'], axis=0)) *res#/ 512 / 0.013
-
-                    Tpiv_std = (np.expand_dims(np.load(filename)['Tpiv_std'], axis=0)) *res#/ 512 / 0.013
-                    Tptv_std = (np.expand_dims(np.load(filename)['Tptv_std'], axis=0)) *res#/ 512 / 0.013
-                
                     filename = f"{root_folder}results/predictions_{model_name}.npz"
 
                     data = np.load(filename)
 
                     dns_target = data['dns_target'] * res
                     cbc_predic = data['cbc_predic'] * res
+                    gap_predic = data['gap_predic'] * res
                     hr_predic  = data['hr_predic'] 
                     hr_target  = data['hr_target'] 
                     lr_target  = data['lr_target'] 
                     fl_target  = data['fl_target']
+
+                    dns_target = np.where(np.sum(fl_target, axis=0) == 0, np.nan, dns_target)
+                    cbc_predic = np.where(np.sum(fl_target, axis=0) == 0, np.nan, cbc_predic)
+                    gap_predic = np.where(np.sum(fl_target, axis=0) == 0, np.nan, gap_predic)
+                    hr_predic = np.where(np.sum(fl_target, axis=0) == 0, np.nan, hr_predic)
 
                     """
                         Error metrics
                     """
 
                     # Mean-squared error
-                    print(np.sqrt(np.nanmean(np.divide((dns_target[:, :, :, 0] - hr_predic[:, :, :, 0])**2, Tptv_std * Tptv_std, out=np.zeros_like(dns_target[:, :, :, 0]), where=Tptv_std!=0))))
-                    print(np.sqrt(np.nanmean(np.divide((dns_target[:, :, :, 0] - cbc_predic[:, :, :, 0])**2, Tptv_std * Tptv_std, out=np.zeros_like(dns_target[:, :, :, 0]), where=Tptv_std!=0))))
-                    # print(np.sqrt(np.nanmean((dns_target[801:1000, :, :, 0] -  hr_predic[801:1000, :, :, 0])**2 / (Tptv_std * Tptv_std))))
-                    # print(np.sqrt(np.nanmean((dns_target[801:1000, :, :, 0] - cbc_predic[801:1000, :, :, 0])**2 / (Tptv_std * Tptv_std))))
 
-
-                    import matplotlib.pyplot as plt
-
-                    plt.subplot(311)
-                    plt.imshow(dns_target[990, :, :, 0], vmin=-0.02,vmax=0.02, cmap='RdBu_r', extent=[-2,6,-3,3])
-
-                    plt.subplot(312)
-                    plt.imshow(cbc_predic[990, :, :, 0], vmin=-0.02,vmax=0.02, cmap='RdBu_r', extent=[-2,6,-3,3])
-                    plt.subplot(313)
-                    plt.imshow(hr_predic[990, :, :, 0], vmin=-0.02,vmax=0.02, cmap='RdBu_r', extent=[-2,6,-3,3])
-
-                    plt.savefig('test.png')
+                    scaT = np.nanvar(dns_target[:,:,:,0])
+                    print(scaT)
+                    print('GAN')
+                    print(np.round(np.sqrt(np.nanmean((dns_target[:, :, 1:, 0] -   hr_predic[:, :, 1:, 0])**2/ scaT)),3))
+                    print('Cubic')
+                    print(np.round(np.sqrt(np.nanmean((dns_target[:, :, 1:, 0] -  cbc_predic[:, :, 1:, 0])**2/ scaT)),3))
+                    print('Gappy')
+                    print(np.round(np.sqrt(np.nanmean((dns_target[:, :, 1:, 0] -  gap_predic[:, :, 1:, 0])**2/ scaT)),3))
 
     return
 
@@ -171,8 +146,10 @@ if __name__ == '__main__':
     parser.add_argument("-m", "--model_name", type=str, nargs='+', required=True)
     parser.add_argument("-u", "--upsampling", type=int, nargs='+', required=True)
     parser.add_argument("-n", "--noise", type=int, required=True)
+    parser.add_argument("-s", "--subversion", type=str, default="")
     args = parser.parse_args()
     noise = f"{args.noise:03d}"
+    subversion = args.subversion   
 
     """
         Run execution logic
