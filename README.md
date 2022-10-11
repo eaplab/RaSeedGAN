@@ -45,11 +45,10 @@ python run_compute_predictions.py -c pinball -u 4 -m architecture01-noise-010 -n
 
 On a system with one GPU available, fluidic pinball case with upsampling factor <img src="https://render.githubusercontent.com/render/math?math=f_u=4"> takes approximately 100 seconds to run a sinfle epoch. 
 
-## **Publications**
-This repository has been used for the following scientific publications:
+## **Publication**
+This repository has been used for the following scientific publication:
 
 - Güemes, A., Sanmiguel Vila, C., & Discetti, S. (2022). Super-resolution GANs of randomly-seeded fields. *arXiv preprint arXiv:2202.11701*.
-- Güemes, A., Sanmiguel Vila, C., & Discetti, S. (2021, August). GANs-based PIV resolution enhancement without the need of high-resolution input. In *14th International Symposium on Particle Image Velocimetry (Vol. 1, No. 1)*.
 
 ## **Authorship**
 This repository has been developed in the Experimental Aerodynamics and Propulsion group at Universidad Carloss III de Madrid. The following researchers are acknowledged for their contributions:
